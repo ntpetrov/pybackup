@@ -3,7 +3,7 @@
 """
 Name: mYbackup version 0.8
 Author: Nikolay Petrov ntpetrov@gmail.com
-Date: 30.09.2015
+Date: 30.03.2015
 ---------------------
 Future improvements:
 Clean code
