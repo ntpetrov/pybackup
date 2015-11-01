@@ -1,12 +1,22 @@
 rsync:
     user: root
-    server: example.com
-    args: -avze 'ssh -i /root/somekey.pem'
-    log_file: /var/log/backup.log
+    server: myserver.org
+    args: -avze 'ssh -i /root/somekey.pem' --exclude tmp/ --exclude temp/ --exclude cache/
+    log_file: /var/log/pybackup.log
     backup_dir: /backup/
-    mysql_backup_dir: /mysql/
 
 dirs:
     - /var/www/
     - /var/vmail/
     - /root/
+
+mysql:
+    user: root
+    server: myserver.org
+    backup_dir: /mysql/
+    password: mysql_pass
+
+databases:
+    - vexim
+    - wordpress
+    - joomla
