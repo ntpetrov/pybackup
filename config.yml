@@ -23,3 +23,12 @@ databases:
 
 find:
     days: 2
+
+mail:
+    to: my_email@gmail.com
+    from: backup@myserver.org
+    subject: Your daily backup
+    body: Please check the attached file
+    host: mail.myserver.org
+    port: 25
+    pass: my_pass
