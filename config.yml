@@ -1,0 +1,12 @@
+rsync:
+    user: root
+    server: example.com
+    args: -avze 'ssh -i /root/somekey.pem'
+    log_file: /var/log/backup.log
+    backup_dir: /backup/
+    mysql_backup_dir: /mysql/
+
+dirs:
+    - /var/www/
+    - /var/vmail/
+    - /root/
