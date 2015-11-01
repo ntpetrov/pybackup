@@ -20,3 +20,6 @@ databases:
     - vexim
     - wordpress
     - joomla
+
+find:
+    days: 2
