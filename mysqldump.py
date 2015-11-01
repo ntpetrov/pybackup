@@ -32,6 +32,7 @@ def mysqldump():
         # fix paths in DATETIME - add trailing slash
         DATETIME = time.strftime("%d-%m-%Y")
         DATETIME = DATETIME + '/'
+        MYSQL_ROOT_DIR = BACKUP_DIR + MYSQL_DIR
         REAL_DIR = BACKUP_DIR + MYSQL_DIR + DATETIME
         
         # ensure that backup_dirs exist
@@ -39,10 +40,14 @@ def mysqldump():
         if not outdir.exists():
             log.mark('Creating mysql dir %s' % outdir)
             outdir.makedirs()
-    
+
+        # dumping all databases    
         sh('/usr/bin/echo Dumping %s >> %s' % (DB, config['rsync']['log_file']))
         sh('/usr/bin/mysqldump -h %s -u %s -p%s %s | gzip -9 > %s%s.sql.gz' % (config['mysql']['server'], config['mysql']['user'], config['mysql']['password'], DB, REAL_DIR, DB))
         sh('/usr/bin/echo Done >> %s' %config['rsync']['log_file'])
+
+        # cleaning old databases in mysql_backup_dir
+        sh('/usr/bin/find %s -type d -mtime +%s -exec /bin/rm -rf {} \; &>/dev/null' % (MYSQL_ROOT_DIR, config['find']['days']))
 
 if __name__ == '__main__':
     mysqldump()
