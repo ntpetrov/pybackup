@@ -32,3 +32,4 @@ mail:
     host: mail.myserver.org
     port: 25
     pass: my_pass
+    pass: my_pass
